@@ -55,16 +55,16 @@ def issue_voucher():
     """Main logic for calculating fares and displaying the voucher [cite: 146-160]."""
     display_station_board()
     
-    # 1. Select Zones
+    # Select Zones
     start_zone = get_valid_zone("Select START zone:")
     dest_zone = get_valid_zone("Select DESTINATION zone:")
     
-    # 2. Calculate Zones Travelled
+    # Calculate Zones Travelled
     # Logic: 1 zone if same, 2 if adjacent (Central-Midtown), 3 if Downtown-Central [cite: 17]
     zone_order = {"Central": 0, "Midtown": 1, "Downtown": 2}
     zones_travelled = abs(zone_order[start_zone] - zone_order[dest_zone]) + 1
     
-    # 3. Get Passenger Numbers
+    # Get Passenger Numbers
     passengers = {}
     for cat in FARE_RATES.keys():
         passengers[cat] = get_passenger_count(cat)
@@ -74,7 +74,7 @@ def issue_voucher():
         print("No passengers selected. Voucher cancelled.")
         return
 
-    # 4. Display Voucher
+    # Display Voucher
     print("\n" + "*"*40)
     print("        CENTRALA TRANSPORT AUTHORITY")
     print(f"Date/Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
